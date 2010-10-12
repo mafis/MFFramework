@@ -27,6 +27,10 @@ static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
 	{
 		isLogin = (BOOL)[delegate performSelector:@selector(UserSessionWillLoginUser:) withObject:newUser];
 	}
+	else {
+		isLogin = YES;
+	}
+
 	
 	if (isLogin) {
 		
@@ -37,7 +41,7 @@ static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
 	
 		self.user = newUser;
 		
-		if(autosaveUser)
+		if(self.autosaveUser)
 			[self saveUser];
 	}
 	
@@ -52,6 +56,10 @@ static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
 	{
 		isLogout = (BOOL)[delegate performSelector:@selector(UserSessionWillLogoutUser:) withObject:self.user];
 	}
+	else {
+		isLogout = YES;
+	}
+	
 	
 	if(isLogout)
 	{
@@ -60,11 +68,16 @@ static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
 	}
 	
 	
-	if(autosaveUser)
+	
+	if(self.autosaveUser)
 		[self clearUser];
 	
 	return isLogout;
 }
+
+
+#pragma mark -
+#pragma mark PersistentUser
 
 -(void)saveUser
 {
@@ -125,6 +138,14 @@ static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
 		
 	}
     return sharedMFUserSessionManager;
+}
+
+#pragma mark -
+
+-(void)dealloc
+{
+	[user release];
+	[super dealloc];
 }
 
 

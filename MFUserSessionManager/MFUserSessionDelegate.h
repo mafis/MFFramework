@@ -18,7 +18,7 @@
 
 @protocol MFUserSessionDelegate <NSObject>
 
-@required 
+@optional 
 -(BOOL)UserSessionWillLoginUser:(id<MFUserProtocol>)user;
 -(BOOL)UserSessionWillLogoutUser:(id<MFUserProtocol>)user;
 

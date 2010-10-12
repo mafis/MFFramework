@@ -12,8 +12,8 @@
 @protocol MFUserProtocol <NSObject,NSCoding>
 
 @required
-@property (nonatomic, retain) NSString* username;
 
 @optional
+@property (nonatomic, retain) NSString* username;
 
 @end
