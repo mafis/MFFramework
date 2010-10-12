@@ -10,7 +10,7 @@
 #import "MFUserProtocol.h"
 #import "MFUserSessionDelegate.h"
 
-static MFUserSessionManager *sharedMFUserSessionManager;
+static MFUserSessionManager *sharedUserSessionManager;
 static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
 
 @implementation MFUserSessionManager
@@ -116,7 +116,7 @@ static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
     static BOOL initialized = NO;
     if (!initialized) {
         self = [super init];
-        sharedMFUserSessionManager = self;
+        sharedUserSessionManager = self;
         initialized = YES;
     }
     return self;
@@ -124,20 +124,20 @@ static NSString *MFUserDefaultsUser = @"MFUserDefaultsUser";
 
 + (id)allocWithZone:(NSZone*)zone {
     @synchronized (self) {
-        if (!sharedMFUserSessionManager)
-            sharedMFUserSessionManager = [super allocWithZone:zone];     
+        if (!sharedUserSessionManager)
+            sharedUserSessionManager = [super allocWithZone:zone];     
     }
-    return sharedMFUserSessionManager;
+    return sharedUserSessionManager;
 }
 
-+ (MFUserSessionManager*)sharedMFUserSessionManager {
-    if (!sharedMFUserSessionManager)
++ (MFUserSessionManager*)sharedUserSessionManager {
+    if (!sharedUserSessionManager)
 	{  
 		[[MFUserSessionManager alloc] init];
-		[sharedMFUserSessionManager loadSavedUser];
+		[sharedUserSessionManager loadSavedUser];
 		
 	}
-    return sharedMFUserSessionManager;
+    return sharedUserSessionManager;
 }
 
 #pragma mark -

@@ -29,7 +29,7 @@
 
 #pragma mark -
 #pragma mark Singleton
-+ (MFUserSessionManager*)sharedMFUserSessionManager;
++ (MFUserSessionManager*)sharedUserSessionManager;
 
 
 @end
